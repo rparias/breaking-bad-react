@@ -26,7 +26,9 @@ const Button = styled.button`
 
 function App() {
   const handleOnClick = () => {
-    console.log('consultando...');
+    const result = fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
+      .then(response => response.json())
+      .then(response => console.log(response[0]));
   };
 
   return (

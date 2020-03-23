@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Quote from './components/Quote';
 
@@ -23,10 +23,20 @@ const Button = styled.button`
   padding: 1rem 3rem;
   font-size: 2rem;
   border: 2px solid black;
+  transition: background-size 0.8s ease;
+
+  :hover {
+    cursor: pointer;
+    background-size: 400px;
+  }
 `;
 
 function App() {
   const [quote, updateQuote] = useState({});
+
+  useEffect(() => {
+    handleOnClick();
+  }, []);
 
   const handleOnClick = () => {
     fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')

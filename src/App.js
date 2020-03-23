@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import Quote from './components/Quote';
 
 const Container = styled.div`
   display: flex;
@@ -25,14 +26,17 @@ const Button = styled.button`
 `;
 
 function App() {
+  const [quote, updateQuote] = useState({});
+
   const handleOnClick = () => {
-    const result = fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
+    fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
       .then(response => response.json())
-      .then(response => console.log(response[0]));
+      .then(response => updateQuote(response[0]));
   };
 
   return (
     <Container>
+      <Quote quote={quote} />
       <Button onClick={handleOnClick}>Obtener Frase</Button>
     </Container>
   );
